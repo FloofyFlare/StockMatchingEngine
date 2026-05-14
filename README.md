@@ -1,78 +1,72 @@
 # StockMatchingEngine
-📈 Stock Matching Engine
-A low‑latency, deterministic limit order book + matching engine implemented in C++.
 
-🚀 Overview
-This project implements a high‑performance, price‑time‑priority matching engine similar to those used in modern electronic exchanges.
+📈 A low-latency, deterministic limit order book and matching engine implemented in C++.
+
+## 🚀 Overview
+
+This project implements a high-performance, price-time-priority matching engine similar to those used in modern electronic exchanges.
+
 It is designed for:
 
-Deterministic behavior
+- Deterministic behavior
+- Microsecond-level latency
+- Million+ orders/sec throughput per core
+- Replayability and auditability
+- Sharded, single-threaded architecture for predictable performance
 
-Microsecond‑level latency
+The engine supports multiple symbols, aggressive and passive order types, and a fully in-memory limit order book optimized for cache locality.
 
-Million+ orders/sec throughput per core
+## ✨ Features
 
-Replayability and auditability
+- Limit, Market, IOC, FOK, Cancel, Replace order types
+- Price-time priority with strict FIFO queues
+- Partial fills and multi-level sweeps
+- Deterministic single-threaded matching core
+- Sharded architecture (one thread per symbol group)
+- SPSC ring buffers for lock-free event passing
+- Zero heap allocations on the hot path
+- Replay engine for correctness testing
+- Top-of-book and trade event output
 
-Sharded, single‑threaded architecture for predictable performance
+## 🏛 Architecture
 
-The engine supports multiple symbols, aggressive and passive order types, and a fully in‑memory limit order book optimized for cache locality.
+### High-Level Flow
 
-✨ Features
-Limit, Market, IOC, FOK, Cancel, Replace order types
-
-Price‑time priority with strict FIFO queues
-
-Partial fills and multi‑level sweeps
-
-Deterministic single‑threaded matching core
-
-Sharded architecture (one thread per symbol group)
-
-SPSC ring buffers for lock‑free event passing
-
-Zero heap allocations on the hot path
-
-Replay engine for correctness testing
-
-Top‑of‑book + trade event output
-
-🏛 Architecture
-High‑Level Flow
-Code
+```text
 [Ingress] → [Shard Router] → [Matching Engine Shards] → [Egress / Market Data]
-Components
-Ingress
-Parses inbound messages into internal Event structs
+```
 
-Assigns sequence numbers
+### Components
 
-Routes events to shards via SPSC ring buffers
+#### Ingress
 
-Shards (One Thread Per Symbol Group)
-Own independent order books
+- Parses inbound messages into internal `Event` structs
+- Assigns sequence numbers
+- Routes events to shards via SPSC ring buffers
 
-Deterministic, single‑threaded matching
+#### Shards (One Thread Per Symbol Group)
 
-Emits outbound events (trades, acks, book updates)
+- Own independent order books
+- Deterministic, single-threaded matching
+- Emit outbound events such as trades, acknowledgements, and book updates
 
-Egress
-Consumes outbound events
+#### Egress
 
-Writes logs for replay
+- Consumes outbound events
+- Writes logs for replay
+- Publishes market data
 
-Publishes market data
+#### Replay Engine
 
-Replay Engine
-Refeeds logged events
+- Refeeds logged events
+- Verifies deterministic output
+- Checks invariants such as no crossed book and preserved FIFO ordering
 
-Verifies deterministic output
+## 📦 Data Structures
 
-Checks invariants (no crossed book, FIFO preserved, etc.)
+### Order
 
-📦 Data Structures
-Order
-cpp
+```cpp
 struct Order {
     uint64_t order_id;
     bool     is_buy;
@@ -83,133 +77,122 @@ struct Order {
     Order*   next_in_level;
     Order*   prev_in_level;
 };
-Price Level
-Fixed price
+```
 
-FIFO queue of orders
+### Price Level
 
-Aggregate volume
+- Fixed price
+- FIFO queue of orders
+- Aggregate volume
 
-Order Book
-Bid side: descending price
+### Order Book
 
-Ask side: ascending price
+- Bid side: descending price
+- Ask side: ascending price
+- `unordered_map<order_id, Order*>` for `O(1)` cancels
+- `std::map` or a custom tree/skiplist for price levels
 
-unordered_map<order_id → Order*> for O(1) cancels
+## ⚡ Matching Logic
 
-std::map or custom tree/skiplist for price levels
+### Buy Order Path
 
-⚡ Matching Logic
-Buy Order Path
-While best ask exists and buy_price ≥ best_ask_price
+1. While best ask exists and `buy_price >= best_ask_price`
+2. Match against head of best ask FIFO
+3. Emit trade event
+4. Remove or update resting order
+5. Remove empty price levels
+6. Insert remainder (if limit) or discard (if IOC/FOK)
 
-Match against head of best ask FIFO
+### Sell Order Path
 
-Emit trade event
+Symmetric to the buy path.
 
-Remove or update resting order
+### Cancel / Replace
 
-Remove empty price levels
+- **Cancel:** remove from price level and ID map
+- **Replace:** atomic cancel and reinsert with new time priority
 
-Insert remainder (if limit) or discard (if IOC/FOK)
+## 🧪 Testing & Replay
 
-Sell Order Path
-Symmetric to buy.
+### Deterministic Replay
 
-Cancel / Replace
-Cancel: remove from price level + ID map
+Used to reproduce engine output bit-for-bit and validate:
 
-Replace: atomic cancel + reinsert (new time priority)
+- FIFO ordering
+- No negative quantities
+- No crossed book
+- Identical outputs for identical inputs
 
-🧪 Testing & Replay
-Deterministic Replay
-Reproduce engine output bit‑for‑bit
+### Stress Tests
 
-Validate:
+- Cancel storms
+- Deep sweeps
+- Bursty microbatches
+- Multi-symbol load
 
-FIFO ordering
+## 📊 Performance Targets
 
-No negative quantities
+- 1-5M orders/sec per core sustained
+- P50 < 5µs, P99 < 10-15µs
+- Zero allocations on hot path
+- Cache-aligned structures
+- Branch-predictable matching loops
 
-No crossed book
+## 🧱 Build & Run
 
-Identical outputs for identical inputs
+### Requirements
 
-Stress Tests
-Cancel storms
+- C++20
+- CMake
+- Linux recommended for performance tooling
 
-Deep sweeps
+### Build
 
-Bursty microbatches
-
-Multi‑symbol load
-
-📊 Performance Targets
-1–5M orders/sec per core sustained
-
-P50 < 5µs, P99 < 10–15µs
-
-Zero allocations on hot path
-
-Cache‑aligned structures
-
-Branch‑predictable matching loops
-
-🧱 Build & Run
-Requirements
-C++20
-
-CMake
-
-Linux (recommended for perf tools)
-
-Build
-Code
+```bash
 mkdir build && cd build
 cmake ..
 make -j
-Run Matching Engine
-Code
+```
+
+### Run Matching Engine
+
+```bash
 ./matching_engine --config config.json
-Run Replay
-Code
+```
+
+### Run Replay
+
+```bash
 ./replay --input logs/events.bin
-📡 Market Data Output
-Trade events
+```
 
-Order acknowledgements
+## 📡 Market Data Output
 
-Top‑of‑book updates
+- Trade events
+- Order acknowledgements
+- Top-of-book updates
+- Optional depth snapshots and WebSocket gateway
 
-Optional: depth snapshots, WebSocket gateway
+## 🗺 Roadmap
 
-🗺 Roadmap
-Persistent snapshots
+- Persistent snapshots
+- Multi-core scaling via more shards
+- Risk checks (fat-finger, credit limits)
+- Pro-rata or size-time matching modes
+- Visualization dashboard
 
-Multi‑core scaling via more shards
+## 🧠 Why This Project Exists
 
-Risk checks (fat‑finger, credit limits)
+This engine is built as a systems-level exploration of:
 
-Pro‑rata or size‑time matching modes
+- Deterministic state machines
+- Low-latency data structures
+- Cache-aware programming
+- Lock-free communication
+- Exchange-style matching algorithms
 
-Visualization dashboard
+It is intentionally designed to mirror real-world exchange architecture while remaining small enough to study and extend.
 
-🧠 Why This Project Exists
-This engine is built as a systems‑level exploration of:
+## 🤝 Contributing
 
-Deterministic state machines
-
-Low‑latency data structures
-
-Cache‑aware programming
-
-Lock‑free communication
-
-Exchange‑style matching algorithms
-
-It is intentionally designed to mirror real‑world exchange architecture while remaining small enough to study and extend.
-
-
-A Jane‑Street‑style technical write‑up explaining design tradeoffs
-
-Just tell me what direction you want to push next.
+If you want to contribute, feel free to open an issue or submit a pull request with improvements, benchmarks, or additional features.
