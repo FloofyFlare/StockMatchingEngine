@@ -16,7 +16,7 @@ It is designed for:
 
 The engine supports multiple symbols, aggressive and passive order types, and a fully in-memory limit order book optimized for cache locality.
 
-## ✨ Features
+## ✨ Features (In-progress)
 
 - Limit, Market, IOC, FOK, Cancel, Replace order types
 - Price-time priority with strict FIFO queues
