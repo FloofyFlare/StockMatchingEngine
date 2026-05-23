@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG CMakeFiles/matching_engine.dir/machine/src/main.cpp.o CMakeFiles/matching_engine.dir/machine/src/order_book.cpp.o CMakeFiles/matching_engine.dir/machine/src/matching_engine.cpp.o CMakeFiles/matching_engine.dir/machine/src/shard.cpp.o -o matching_engine 

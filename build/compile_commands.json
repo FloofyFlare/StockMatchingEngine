@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/matching_engine.dir/machine/src/main.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/main.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/main.cpp",
+  "output": "CMakeFiles/matching_engine.dir/machine/src/main.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/matching_engine.dir/machine/src/order_book.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "output": "CMakeFiles/matching_engine.dir/machine/src/order_book.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/matching_engine.dir/machine/src/matching_engine.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "output": "CMakeFiles/matching_engine.dir/machine/src/matching_engine.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/matching_engine.dir/machine/src/shard.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/shard.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/shard.cpp",
+  "output": "CMakeFiles/matching_engine.dir/machine/src/shard.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/bench_matching.dir/machine/bench/bench_matching.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/bench/bench_matching.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/bench/bench_matching.cpp",
+  "output": "CMakeFiles/bench_matching.dir/machine/bench/bench_matching.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/bench_matching.dir/machine/src/order_book.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "output": "CMakeFiles/bench_matching.dir/machine/src/order_book.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/bench_matching.dir/machine/src/matching_engine.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "output": "CMakeFiles/bench_matching.dir/machine/src/matching_engine.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/run_tests.dir/machine/tests/test_order_book.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/tests/test_order_book.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/tests/test_order_book.cpp",
+  "output": "CMakeFiles/run_tests.dir/machine/tests/test_order_book.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/run_tests.dir/machine/tests/test_matching.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/tests/test_matching.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/tests/test_matching.cpp",
+  "output": "CMakeFiles/run_tests.dir/machine/tests/test_matching.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/run_tests.dir/machine/src/order_book.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/order_book.cpp",
+  "output": "CMakeFiles/run_tests.dir/machine/src/order_book.cpp.o"
+},
+{
+  "directory": "/home/raymond/Code/summer_projects/StockMatchingEngine/build",
+  "command": "/usr/bin/c++  -I/home/raymond/Code/summer_projects/StockMatchingEngine/machine/include -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG -std=gnu++20 -o CMakeFiles/run_tests.dir/machine/src/matching_engine.cpp.o -c /home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "file": "/home/raymond/Code/summer_projects/StockMatchingEngine/machine/src/matching_engine.cpp",
+  "output": "CMakeFiles/run_tests.dir/machine/src/matching_engine.cpp.o"
+}
+]

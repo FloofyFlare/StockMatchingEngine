@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG CMakeFiles/run_tests.dir/machine/tests/test_order_book.cpp.o CMakeFiles/run_tests.dir/machine/tests/test_matching.cpp.o CMakeFiles/run_tests.dir/machine/src/order_book.cpp.o CMakeFiles/run_tests.dir/machine/src/matching_engine.cpp.o -o run_tests 

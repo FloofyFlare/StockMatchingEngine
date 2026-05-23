@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -march=native -fno-exceptions -fno-rtti -DNDEBUG CMakeFiles/bench_matching.dir/machine/bench/bench_matching.cpp.o CMakeFiles/bench_matching.dir/machine/src/order_book.cpp.o CMakeFiles/bench_matching.dir/machine/src/matching_engine.cpp.o -o bench_matching 
