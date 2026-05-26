@@ -1,4 +1,4 @@
-# StockMatchingEngine
+# StockMatchingEngine (IN PROGRESS)
 
 📈 A low-latency, deterministic limit order book and matching engine implemented in C++.
 
