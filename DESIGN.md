@@ -11,3 +11,12 @@ order.hpp
 - orders are designed to not create unnessecary cache misses
 - Prev is rare and for cancels in the list so its in its own cache line
 - We need to pad data structures so that two threads do not 'fight' over variables being shared on a single cache line.
+
+order_book.hpp
+- Currently correct but needs to be upgraded for cache locality
+- Map should be enhanced with a sorted flat_hash_map for the first N for locality
+- unordered map should become a flat_hash_map
+
+Learning Notes:
+Hot paths and 
+Cold paths require different levels of code optimization in temporary solutions 
