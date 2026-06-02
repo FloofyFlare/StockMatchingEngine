@@ -55,3 +55,21 @@ bool OrderBook::cancel(uint64_t order_id) {
     return true;
 }
 
+// void OrderBook::remove_order(Order* order){
+
+
+
+// }
+
+// void OrderBook::remove_level_if_empty(Side side, int64_t price_ticks){
+//     if(side == Side::BUY){
+//         auto it = OrderBook::asks_.find(price_ticks);
+        
+
+//     } else {
+
+
+
+//     }
+
+// }

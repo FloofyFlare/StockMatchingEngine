@@ -16,6 +16,7 @@ order_book.hpp
 - Currently correct but needs to be upgraded for cache locality
 - Map should be enhanced with a sorted flat_hash_map for the first N for locality
 - unordered map should become a flat_hash_map
+- Orders are chained together in a doubly linked list
 
 Learning Notes:
 Hot paths and 
