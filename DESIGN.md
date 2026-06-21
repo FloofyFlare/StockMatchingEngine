@@ -19,5 +19,5 @@ order_book.hpp
 - Orders are chained together in a doubly linked list
 
 Learning Notes:
-Hot paths and 
-Cold paths require different levels of code optimization in temporary solutions 
+- Hot paths and Cold paths require different levels of code optimization in temporary solutions 
+- Remember that Vector does have an overhead if you can avoid using it you should

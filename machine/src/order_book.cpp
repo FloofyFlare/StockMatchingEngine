@@ -55,21 +55,49 @@ bool OrderBook::cancel(uint64_t order_id) {
     return true;
 }
 
-// void OrderBook::remove_order(Order* order){
+void OrderBook::remove_order(Order* order){
+    auto side = order->side;
+    if(side == Side::BUY){
+        auto& levels = bids_;
+        auto it = levels.find(order->price_ticks);
+        if(it != levels.end()){
+            PriceLevel& level = it->second;
+            if(order->prev) order->prev->next = order->next;
+            else level.head = order->next; // Removing head
 
+            if(order->next) order->next->prev = order->prev;
+            else level.tail = order->prev; // Removing tail
 
+            level.total_quantity -= order->quantity;
+            level.order_count--;
+        }
+    } else {
+        auto& levels = asks_;
+        auto it = levels.find(order->price_ticks);
+        if(it != levels.end()){
+            PriceLevel& level = it->second;
+            if(order->prev) order->prev->next = order->next;
+            else level.head = order->next; // Removing head
 
-// }
+            if(order->next) order->next->prev = order->prev;
+            else level.tail = order->prev; // Removing tail
 
-// void OrderBook::remove_level_if_empty(Side side, int64_t price_ticks){
-//     if(side == Side::BUY){
-//         auto it = OrderBook::asks_.find(price_ticks);
-        
+            level.total_quantity -= order->quantity;
+            level.order_count--;
+        }
+    }
+}
 
-//     } else {
-
-
-
-//     }
-
-// }
+void OrderBook::remove_level_if_empty(Side side, int64_t price_ticks){
+    if(side == Side::BUY){
+        auto it = OrderBook::asks_.find(price_ticks);
+        if(it != OrderBook::asks_.end() && it->second.order_count == 0){
+            OrderBook::asks_.erase(it);
+        }
+    } else {
+        auto it = OrderBook::bids_.find(price_ticks);
+        if(it != OrderBook::bids_.end() && it->second.order_count == 0){
+            OrderBook::bids_.erase(it);
+        }
+    }
+}
