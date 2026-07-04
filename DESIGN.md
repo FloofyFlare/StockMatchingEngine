@@ -18,6 +18,11 @@ order_book.hpp
 - unordered map should become a flat_hash_map
 - Orders are chained together in a doubly linked list
 
+matching_engine.hpp/cpp
+- FOK must be validated **before** any matching begins. Walk the ask side and accumulate available quantity. If insufficient, cancel without modifying the book.
+- Matches only while incoming->price_ticks >= best_ask->price_ticks
+
 Learning Notes:
 - Hot paths and Cold paths require different levels of code optimization in temporary solutions 
 - Remember that Vector does have an overhead if you can avoid using it you should
+- You can use likely and unlikely to git the compiler hits. By giving the compiler these hints, you can optimize the actual machine code layout. This minimizes expensive cache misses and drastically improves CPU instruction cache efficiency and pipelining.
