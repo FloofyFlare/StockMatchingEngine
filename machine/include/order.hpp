@@ -3,7 +3,7 @@
 #include <cstddef>
 
 enum class Side : uint8_t { BUY, SELL };
-enum class Ordertype : uint8_t { LIMIT, MARKET, IOC, FOK };
+enum class OrderType : uint8_t { LIMIT, MARKET, IOC, FOK };
 
 // CPUs don't fetch individual bytes from RAM — they fetch 64-byte chunks called cache lines
 struct alignas(64) Order {
@@ -12,7 +12,7 @@ struct alignas(64) Order {
     int64_t     quantity;
     Order*      next;
     Side        side;
-    Ordertype   type;
+    OrderType   type;
     uint8_t     _pad[6];
 
     // cache line 0 second half: warm fields
